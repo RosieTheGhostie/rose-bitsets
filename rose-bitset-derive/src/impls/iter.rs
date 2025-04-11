@@ -5,9 +5,11 @@ use syn::{Ident, Type};
 pub fn generate_code(ident: &Ident, uint: &Type, int: &Type, suffix: &str) -> TokenStream {
     let iterator = format_ident!("BitSetIter{suffix}");
     let ident_link = format!("[`{ident}`].");
+    let feature_flag = format!("b{suffix}");
     quote! {
         #[doc = "An iterator over the bits of a"]
         #[doc = #ident_link]
+        #[cfg_attr(docsrs, doc(cfg(feature = #feature_flag)))]
         pub struct #iterator<'a, Direction = crate::Ascending> {
             bits: #uint,
             i: #uint,
@@ -55,6 +57,7 @@ pub fn generate_code(ident: &Ident, uint: &Type, int: &Type, suffix: &str) -> To
         impl #ident {
             /// Creates an iterator over the bits of the set.
             #[must_use]
+            #[cfg_attr(docsrs, doc(cfg(feature = #feature_flag)))]
             pub const fn iter_bits<Direction>(&self) -> #iterator<'_, Direction>
             where
                 for<'a> #iterator<'a, Direction>: ::core::iter::Iterator<Item = bool>,

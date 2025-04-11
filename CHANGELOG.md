@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `BitSetIndicesN<'_, Ascending>` now works correctly
 - `<style>` block no longer visible on [GitHub](https://github.com) or
   [crates.io](https://crates.io) (I deleted it)
+- [docs.rs](https://docs.rs/rose-bitsets/latest/rose_bitsets/) now shows feature flag notices
 
 ## [0.1.0-alpha] - 2025-04-11
 
