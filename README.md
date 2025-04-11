@@ -1,4 +1,8 @@
-![Tests](https://github.com/RosieTheGhostie/rose-bitsets/actions/workflows/tests.yml/badge.svg)
+[![](https://github.com/RosieTheGhostie/rose-bitsets/actions/workflows/tests.yml/badge.svg)][GitHub Actions]
+[![](https://docs.rs/rose-bitsets/badge.svg)][docs.rs]
+[![](https://img.shields.io/crates/v/rose-bitsets.svg)][crates.io]
+[![](https://img.shields.io/crates/d/rose-bitsets.svg)][crates.io]
+[![](https://img.shields.io/badge/license-MIT-blue.svg)][License]
 
 Small, fixed-size bitsets for storing integers/indices.
 
@@ -252,4 +256,8 @@ significant end and works towards the least significant.
 [`BitSetSize`]: https://docs.rs/rose-bitsets/latest/rose_bitsets/struct.BitSetSize.html
 [`core::cmp::PartialOrd`]: https://doc.rust-lang.org/core/cmp/trait.PartialOrd.html
 [`std::collections::HashSet`]: https://doc.rust-lang.org/std/collections/struct.HashSet.html
+[crates.io]: https://crates.io/crates/rose-bitsets/
+[docs.rs]: https://docs.rs/rose-bitsets/latest/rose_bitsets/
+[GitHub Actions]: https://github.com/RosieTheGhostie/rose-bitsets/actions
+[License]: https://github.com/RosieTheGhostie/rose-bitsets/blob/main/LICENSE.txt
 [set theory]: https://en.wikipedia.org/wiki/Set_(mathematics)
