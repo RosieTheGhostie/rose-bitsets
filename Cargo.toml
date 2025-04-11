@@ -1,0 +1,38 @@
+[package]
+name = "rose-bitsets"
+version = "0.1.0-alpha"
+authors = ["RosieTheGhostie <rosetheghost.dev@gmail.com>"]
+edition = "2024"
+description = "Small, fixed-size bitsets for storing integers/indices."
+documentation = "https://docs.rs/rose-bitsets/latest/"
+readme = "README.md"
+repository = "https://github.com/RosieTheGhostie/rose-bitsets"
+keywords = ["set", "bitset"]
+categories = ["algorithms", "data-structures", "mathematics"]
+license = "MIT"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[lib]
+crate-type = ["lib"]
+path = "src/lib.rs"
+
+[workspace]
+resolver = "2"
+
+[dependencies]
+bytemuck = { version = "1.22.0", features = ["derive"], optional = true }
+rose-bitset-derive = { version = "0.1.0-alpha", path = "rose-bitset-derive", optional = true }
+
+[features]
+default = ["b8", "b16", "b32", "b64"]
+full = ["b8", "b16", "b32", "b64", "b128", "bsize", "bytemuck"]
+
+b8 = ["rose-bitset-derive"]
+b16 = ["rose-bitset-derive"]
+b32 = ["rose-bitset-derive"]
+b64 = ["rose-bitset-derive"]
+b128 = ["rose-bitset-derive"]
+bsize = ["rose-bitset-derive"]
