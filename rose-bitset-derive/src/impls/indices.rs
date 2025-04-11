@@ -18,10 +18,11 @@ pub fn generate_code(ident: &Ident, uint: &Type, suffix: &str) -> TokenStream {
             type Item = usize;
 
             fn next(&mut self) -> ::core::option::Option<Self::Item> {
-                let i = self.bits.trailing_zeros() as usize;
+                let mut i = self.bits.trailing_zeros() as usize;
                 (i < #ident::CAPACITY).then(|| {
                     let relative_shift = unsafe { i.unchecked_add(1) } as #uint;
                     self.bits >>= relative_shift;
+                    i += self.shift as usize;
                     self.shift += relative_shift;
                     i
                 })

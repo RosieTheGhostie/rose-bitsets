@@ -26,6 +26,9 @@ resolver = "2"
 bytemuck = { version = "1.22.0", features = ["derive"], optional = true }
 rose-bitset-derive = { version = "0.1.0-alpha", path = "rose-bitset-derive", optional = true }
 
+[dev-dependencies]
+rstest = "0.25.0"
+
 [features]
 default = ["b8", "b16", "b32", "b64"]
 full = ["b8", "b16", "b32", "b64", "b128", "bsize", "bytemuck"]

@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Unit tests for iterating over `BitSet8`, `BitSet16`, `BitSet32`,
+  and `BitSet64` in either direction
+
+### Fixed
+
+- `BitSetIndicesN<'_, Ascending>` now works correctly
+
 ## [0.1.0-alpha] - 2025-04-11
 
 ### Added
