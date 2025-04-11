@@ -1,6 +1,6 @@
 [package]
 name = "rose-bitset-derive"
-version = "0.1.0-alpha"
+version = "0.1.0-beta"
 authors = ["RosieTheGhostie <rosetheghost.dev@gmail.com>"]
 edition = "2024"
 description = "Procedural macros internal to the 'rose-bitsets' crate."

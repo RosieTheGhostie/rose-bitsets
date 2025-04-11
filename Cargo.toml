@@ -1,6 +1,6 @@
 [package]
 name = "rose-bitsets"
-version = "0.1.0-alpha"
+version = "0.1.0-beta"
 authors = ["RosieTheGhostie <rosetheghost.dev@gmail.com>"]
 edition = "2024"
 description = "Small, fixed-size bitsets for storing integers/indices."
@@ -24,7 +24,7 @@ resolver = "2"
 
 [dependencies]
 bytemuck = { version = "1.22.0", features = ["derive"], optional = true }
-rose-bitset-derive = { version = "0.1.0-alpha", path = "rose-bitset-derive", optional = true }
+rose-bitset-derive = { version = "0.1.0-beta", path = "rose-bitset-derive", optional = true }
 
 [dev-dependencies]
 rstest = "0.25.0"

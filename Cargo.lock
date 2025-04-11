@@ -220,7 +220,7 @@ checksum = "ba39f3699c378cd8970968dcbff9c43159ea4cfbd88d43c00b22f2ef10a435d2"
 
 [[package]]
 name = "rose-bitset-derive"
-version = "0.1.0-alpha"
+version = "0.1.0-beta"
 dependencies = [
  "proc-macro-error",
  "proc-macro2",
@@ -230,7 +230,7 @@ dependencies = [
 
 [[package]]
 name = "rose-bitsets"
-version = "0.1.0-alpha"
+version = "0.1.0-beta"
 dependencies = [
  "bytemuck",
  "rose-bitset-derive",

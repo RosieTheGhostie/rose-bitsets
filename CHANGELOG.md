@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-beta] - 2025-04-11
+
 ### Added
 
 - Unit tests for iterating over `BitSet8`, `BitSet16`, `BitSet32`,
@@ -16,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `BitSetIndicesN<'_, Ascending>` now works correctly
-- `<style>` block no longer visible on [GitHub](https://github.com) or
+- `<style>` block no longer visible on [GitHub](https://github.com/RosieTheGhostie/rose-bitsets) or
   [crates.io](https://crates.io/crates/rose-bitsets/) (I deleted it)
 - [docs.rs](https://docs.rs/rose-bitsets/latest/rose_bitsets/) now shows feature flag notices
 
@@ -52,5 +54,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A handful of unit tests
 - Automated testing with GitHub Actions
 
-[unreleased]: https://github.com/RosieTheGhostie/rose-bitsets/compare/v0.1.0-alpha...HEAD
+[unreleased]: https://github.com/RosieTheGhostie/rose-bitsets/compare/v0.1.0-beta...HEAD
+[0.1.0-beta]: https://github.com/RosieTheGhostie/rose-bitsets/compare/v0.1.0-alpha...v0.1.0-beta
 [0.1.0-alpha]: https://github.com/RosieTheGhostie/rose-bitsets/releases/tag/v0.1.0-alpha
