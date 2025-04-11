@@ -1,8 +1,4 @@
-<style>
-  .math {
-    font-size: larger;
-  }
-</style>
+![Tests](https://github.com/RosieTheGhostie/rose-bitsets/actions/workflows/tests.yml/badge.svg)
 
 Small, fixed-size bitsets for storing integers/indices.
 
@@ -39,7 +35,7 @@ The following operators are fundamental enough to
     <th>Overloaded Operators</th>
   </tr>
   <tr>
-    <td class="math">𝐴<sup>𝑐</sup></td>
+    <td style="font-size: larger">𝐴<sup>𝑐</sup></td>
     <td><code>a.complement()</code></td>
     <td>
       <code><a href="https://doc.rust-lang.org/core/ops/trait.Neg.html#tymethod.neg">Neg::neg</a></code>
@@ -50,7 +46,7 @@ The following operators are fundamental enough to
     </td>
   </tr>
   <tr>
-    <td class="math">𝐴 &cap; 𝐵</td>
+    <td style="font-size: larger">𝐴 &cap; 𝐵</td>
     <td><code>a.intersection(b)</code></td>
     <td>
       <code><a href="https://doc.rust-lang.org/core/ops/trait.BitAnd.html#tymethod.bitand">BitAnd::bitand</a></code>
@@ -58,7 +54,7 @@ The following operators are fundamental enough to
     </td>
   </tr>
   <tr>
-    <td class="math">𝐴 &cup; 𝐵</td>
+    <td style="font-size: larger">𝐴 &cup; 𝐵</td>
     <td><code>a.union(b)</code></td>
     <td>
       <code><a href="https://doc.rust-lang.org/core/ops/trait.BitOr.html#tymethod.bitor">BitOr::bitor</a></code>
@@ -66,7 +62,7 @@ The following operators are fundamental enough to
     </td>
   </tr>
   <tr>
-    <td class="math">𝐴 &setminus; 𝐵</td>
+    <td style="font-size: larger">𝐴 &setminus; 𝐵</td>
     <td><code>a.difference(b)</code></td>
     <td>
       <code><a href="https://doc.rust-lang.org/core/ops/trait.Sub.html#tymethod.sub">Sub::sub</a></code>
@@ -74,7 +70,7 @@ The following operators are fundamental enough to
     </td>
   </tr>
   <tr>
-    <td class="math">𝐴 &Delta; 𝐵</td>
+    <td style="font-size: larger">𝐴 &Delta; 𝐵</td>
     <td><code>a.symmetric_difference(b)</code></td>
     <td>
       <code><a href="https://doc.rust-lang.org/core/ops/trait.BitXor.html#tymethod.bitxor">BitXor::bitxor</a></code>
@@ -82,7 +78,7 @@ The following operators are fundamental enough to
     </td>
   </tr>
   <tr>
-    <td class="math">𝐴 = 𝐵</td>
+    <td style="font-size: larger">𝐴 = 𝐵</td>
     <td><code>a.is(b)</code></td>
     <td>
       <code><a href="https://doc.rust-lang.org/core/cmp/trait.PartialEq.html#tymethod.eq">PartialEq::eq</a></code>
@@ -90,7 +86,7 @@ The following operators are fundamental enough to
     </td>
   </tr>
   <tr>
-    <td class="math">𝐴 &ne; 𝐵</td>
+    <td style="font-size: larger">𝐴 &ne; 𝐵</td>
     <td><code>a.is_not(b)</code></td>
     <td>
       <code><a href="https://doc.rust-lang.org/core/cmp/trait.PartialEq.html#tymethod.ne">PartialEq::ne</a></code>
@@ -114,47 +110,47 @@ to draw a line between them.
     <th>Method Calls</th>
   </tr>
   <tr>
-    <td class="math">𝐴 &cap; 𝐵 = &empty;</td>
+    <td style="font-size: larger">𝐴 &cap; 𝐵 = &empty;</td>
     <td><code>a.is_disjoint(b)</code></td>
   </tr>
   <tr>
-    <td class="math">𝐴 &subseteq; 𝐵</td>
+    <td style="font-size: larger">𝐴 &subseteq; 𝐵</td>
     <td><code>a.is_subset(b)</code></td>
   </tr>
   <tr>
-    <td class="math">𝐴 &subset; 𝐵</td>
+    <td style="font-size: larger">𝐴 &subset; 𝐵</td>
     <td><code>a.is_strict_subset(b)</code></td>
   </tr>
   <tr>
-    <td class="math">𝐴 &supseteq; 𝐵</td>
+    <td style="font-size: larger">𝐴 &supseteq; 𝐵</td>
     <td><code>a.is_superset(b)</code></td>
   </tr>
   <tr>
-    <td class="math">𝐴 &supset; 𝐵</td>
+    <td style="font-size: larger">𝐴 &supset; 𝐵</td>
     <td><code>a.is_strict_superset(b)</code></td>
   </tr>
   <tr>
-    <td class="math">𝐴 = &empty;</td>
+    <td style="font-size: larger">𝐴 = &empty;</td>
     <td><code>a.is_empty()</code></td>
   </tr>
   <tr>
-    <td class="math">𝐴 = 𝑈</td>
+    <td style="font-size: larger">𝐴 = 𝑈</td>
     <td><code>a.is_full()</code></td>
   </tr>
   <tr>
-    <td class="math">|𝐴|</td>
+    <td style="font-size: larger">|𝐴|</td>
     <td><code>a.len()</code></td>
   </tr>
   <tr>
-    <td class="math">𝑥 &in; 𝐴</td>
+    <td style="font-size: larger">𝑥 &in; 𝐴</td>
     <td><code>a.contains(x)</code></td>
   </tr>
   <tr>
-    <td class="math">min(𝐴)</td>
+    <td style="font-size: larger">min(𝐴)</td>
     <td><code>a.min_index()</code></td>
   </tr>
   <tr>
-    <td class="math">max(𝐴)</td>
+    <td style="font-size: larger">max(𝐴)</td>
     <td>
       <code>a.max_index()</code>
       <br/>
@@ -174,7 +170,7 @@ bitsets.
     <th>Method Calls</th>
   </tr>
   <tr>
-    <td class="math">{ 𝑥 ∈ 𝐴 | 𝑥 < 𝑖 }</td>
+    <td style="font-size: larger">{ 𝑥 ∈ 𝐴 | 𝑥 < 𝑖 }</td>
     <td>
       <code>a.masked_0_to_i(i)</code>
       <br/>
@@ -183,7 +179,7 @@ bitsets.
     </td>
   </tr>
   <tr>
-    <td class="math">{ 𝑥 ∈ 𝐴 | 𝑥 ≥ 𝑖 }</td>
+    <td style="font-size: larger">{ 𝑥 ∈ 𝐴 | 𝑥 ≥ 𝑖 }</td>
     <td>
       <code>a.masked_i_to_N(i)</code>
       <sup id="fnref2"><a href="#fn2">2</a></sup>
