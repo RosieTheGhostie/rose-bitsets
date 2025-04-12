@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Unit tests for...
+  - `BitSetN::complement` (on top of the ones that already existed)
+  - `BitSetN::difference`
+  - `BitSetN::symmetric_difference`
+  - `BitSetN::is`
+  - `BitSetN::is_not`
+  - `<BitSetN as Debug>::fmt`
+
 ## [0.1.0-beta] - 2025-04-11
 
 ### Added
