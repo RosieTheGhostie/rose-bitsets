@@ -172,23 +172,50 @@ bitsets.
   <tr>
     <th>Math</th>
     <th>Method Calls</th>
+    <th>Overloaded Operators</th>
   </tr>
   <tr>
-    <td style="font-size: larger">{ 𝑥 ∈ 𝐴 | 𝑥 < 𝑖 }</td>
+    <td style="font-size: larger">{ 𝑥 &in; 𝐴 | 𝑥 < 𝑖 }</td>
     <td>
       <code>a.masked_0_to_i(i)</code>
       <br/>
       <code>a.cleared_i_to_N(i)</code>
       <sup id="fnref2"><a href="#fn2">2</a></sup>
     </td>
+    <td>N/A</td>
   </tr>
   <tr>
-    <td style="font-size: larger">{ 𝑥 ∈ 𝐴 | 𝑥 ≥ 𝑖 }</td>
+    <td style="font-size: larger">{ 𝑥 &in; 𝐴 | 𝑥 &ge; 𝑖 }</td>
     <td>
       <code>a.masked_i_to_N(i)</code>
       <sup id="fnref2"><a href="#fn2">2</a></sup>
       <br/>
       <code>a.cleared_0_to_i(i)</code>
+    </td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td style="font-size: larger">{ 𝑥 + 𝑠 | 𝑥 &in; 𝐴, 0 &le; 𝑥 + 𝑠 < |𝐴| }</td>
+    <td>
+      <code>a.shifted_up_by(s)</code>
+      <br/>
+      <code>a.shifted_up_by_signed(s)</code>
+    </td>
+    <td>
+      <code><a href="https://doc.rust-lang.org/core/ops/trait.Shl.html#tymethod.shl">Shl::shl</a></code>
+      (<code>a << s</code>)
+    </td>
+  </tr>
+  <tr>
+    <td style="font-size: larger">{ 𝑥 - 𝑠 | 𝑥 &in; 𝐴, 0 &le; 𝑥 - 𝑠 < |𝐴| }</td>
+    <td>
+      <code>a.shifted_down_by(s)</code>
+      <br/>
+      <code>a.shifted_down_by_signed(s)</code>
+    </td>
+    <td>
+      <code><a href="https://doc.rust-lang.org/core/ops/trait.Shr.html#tymethod.shr">Shr::shr</a></code>
+      (<code>a >> s</code>)
     </td>
   </tr>
 </table>
@@ -199,6 +226,10 @@ Because bitsets are meant to act like sets, they share many methods with
 [`std::collections::HashSet`]. Some have been added as well for those who like to aggressively
 optimize their code.
 
+- `shift_up_by`
+- `shift_up_by_signed`
+- `shift_down_by`
+- `shift_down_by_signed`
 - `clear`
 - `clear_0_to_i`
 - `clear_i_to_N`[^2]
