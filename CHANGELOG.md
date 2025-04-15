@@ -16,6 +16,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `BitSetN::is`
   - `BitSetN::is_not`
   - `<BitSetN as Debug>::fmt`
+- Eight shift methods for `BitSetN`
+  - `shifted_up_by`
+  - `shift_up_by`
+  - `shifted_up_by_signed`
+  - `shift_up_by_signed`
+  - `shifted_down_by`
+  - `shift_down_by`
+  - `shifted_down_by_signed`
+  - `shift_down_by_signed`
+- Numeric formatting implementations
+  - `<BitSetN as Binary>::fmt`
+  - `<BitSetN as LowerHex>::fmt`
+  - `<BitSetN as Octal>::fmt`
+  - `<BitSetN as UpperHex>::fmt`
 
 ## [0.1.0-beta] - 2025-04-11
 

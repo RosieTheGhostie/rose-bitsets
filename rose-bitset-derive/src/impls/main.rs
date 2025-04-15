@@ -60,6 +60,14 @@ pub fn generate_code(ident: Ident, uint: Type) -> TokenStream {
     let index_to_size_with_comma = format!("{index_to_size},");
     let index_to_size_with_period = format!("{index_to_size}.\n");
     quote! {
+        impl ::core::fmt::Binary for #ident {
+            fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                write!(f, "{}(", ::core::stringify!(#ident))?;
+                ::core::fmt::Binary::fmt(&self.0, f)?;
+                write!(f, ")")
+            }
+        }
+
         impl ::core::ops::BitAnd for #ident {
             type Output = Self;
 
@@ -114,6 +122,22 @@ pub fn generate_code(ident: Ident, uint: Type) -> TokenStream {
             }
         }
 
+        impl ::core::fmt::LowerHex for #ident {
+            fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                write!(f, "{}(", ::core::stringify!(#ident))?;
+                ::core::fmt::LowerHex::fmt(&self.0, f)?;
+                write!(f, ")")
+            }
+        }
+
+        impl ::core::fmt::Octal for #ident {
+            fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                write!(f, "{}(", ::core::stringify!(#ident))?;
+                ::core::fmt::Octal::fmt(&self.0, f)?;
+                write!(f, ")")
+            }
+        }
+
         impl ::core::ops::Neg for #ident {
             type Output = Self;
 
@@ -130,6 +154,516 @@ pub fn generate_code(ident: Ident, uint: Type) -> TokenStream {
             }
         }
 
+        impl ::core::ops::Shl<u8> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: u8) -> Self::Output {
+                self.shifted_up_by(rhs as u32)
+            }
+        }
+
+        impl ::core::ops::Shl<&u8> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: &u8) -> Self::Output {
+                self.shifted_up_by(*rhs as u32)
+            }
+        }
+
+        impl ::core::ops::Shl<u16> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: u16) -> Self::Output {
+                self.shifted_up_by(rhs as u32)
+            }
+        }
+
+        impl ::core::ops::Shl<&u16> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: &u16) -> Self::Output {
+                self.shifted_up_by(*rhs as u32)
+            }
+        }
+
+        impl ::core::ops::Shl<u32> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: u32) -> Self::Output {
+                self.shifted_up_by(rhs)
+            }
+        }
+
+        impl ::core::ops::Shl<&u32> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: &u32) -> Self::Output {
+                self.shifted_up_by(*rhs)
+            }
+        }
+
+        impl ::core::ops::Shl<u64> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: u64) -> Self::Output {
+                if let Ok(shift) = rhs.try_into() {
+                    self.shifted_up_by(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shl<&u64> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: &u64) -> Self::Output {
+                if let Ok(shift) = (*rhs).try_into() {
+                    self.shifted_up_by(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shl<u128> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: u128) -> Self::Output {
+                if let Ok(shift) = rhs.try_into() {
+                    self.shifted_up_by(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shl<&u128> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: &u128) -> Self::Output {
+                if let Ok(shift) = (*rhs).try_into() {
+                    self.shifted_up_by(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shl<usize> for #ident {
+            type Output = Self;
+
+            #[cfg(target_pointer_width = "64")]
+            fn shl(self, rhs: usize) -> Self::Output {
+                if let Ok(shift) = rhs.try_into() {
+                    self.shifted_up_by(shift)
+                } else {
+                    Self::new()
+                }
+            }
+
+            #[cfg(not(target_pointer_width = "64"))]
+            fn shl(self, rhs: usize) -> Self::Output {
+                self.shifted_up_by(rhs as u32)
+            }
+        }
+
+        impl ::core::ops::Shl<&usize> for #ident {
+            type Output = Self;
+
+            #[cfg(target_pointer_width = "64")]
+            fn shl(self, rhs: &usize) -> Self::Output {
+                if let Ok(shift) = (*rhs).try_into() {
+                    self.shifted_up_by(shift)
+                } else {
+                    Self::new()
+                }
+            }
+
+            #[cfg(not(target_pointer_width = "64"))]
+            fn shl(self, rhs: &usize) -> Self::Output {
+                self.shifted_up_by(*rhs as u32)
+            }
+        }
+
+        impl ::core::ops::Shl<i8> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: i8) -> Self::Output {
+                self.shifted_up_by_signed(rhs as i32)
+            }
+        }
+
+        impl ::core::ops::Shl<&i8> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: &i8) -> Self::Output {
+                self.shifted_up_by_signed(*rhs as i32)
+            }
+        }
+
+        impl ::core::ops::Shl<i16> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: i16) -> Self::Output {
+                self.shifted_up_by_signed(rhs as i32)
+            }
+        }
+
+        impl ::core::ops::Shl<&i16> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: &i16) -> Self::Output {
+                self.shifted_up_by_signed(*rhs as i32)
+            }
+        }
+
+        impl ::core::ops::Shl<i32> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: i32) -> Self::Output {
+                self.shifted_up_by_signed(rhs)
+            }
+        }
+
+        impl ::core::ops::Shl<&i32> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: &i32) -> Self::Output {
+                self.shifted_up_by_signed(*rhs)
+            }
+        }
+
+        impl ::core::ops::Shl<i64> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: i64) -> Self::Output {
+                if let Ok(shift) = rhs.try_into() {
+                    self.shifted_up_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shl<&i64> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: &i64) -> Self::Output {
+                if let Ok(shift) = (*rhs).try_into() {
+                    self.shifted_up_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shl<i128> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: i128) -> Self::Output {
+                if let Ok(shift) = rhs.try_into() {
+                    self.shifted_up_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shl<&i128> for #ident {
+            type Output = Self;
+
+            fn shl(self, rhs: &i128) -> Self::Output {
+                if let Ok(shift) = (*rhs).try_into() {
+                    self.shifted_up_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shl<isize> for #ident {
+            type Output = Self;
+
+            #[cfg(target_pointer_width = "64")]
+            fn shl(self, rhs: isize) -> Self::Output {
+                if let Ok(shift) = rhs.try_into() {
+                    self.shifted_up_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+
+            #[cfg(not(target_pointer_width = "64"))]
+            fn shl(self, rhs: isize) -> Self::Output {
+                self.shifted_up_by_signed(rhs as i32)
+            }
+        }
+
+        impl ::core::ops::Shl<&isize> for #ident {
+            type Output = Self;
+
+            #[cfg(target_pointer_width = "64")]
+            fn shl(self, rhs: &isize) -> Self::Output {
+                if let Ok(shift) = (*rhs).try_into() {
+                    self.shifted_up_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+
+            #[cfg(not(target_pointer_width = "64"))]
+            fn shl(self, rhs: &isize) -> Self::Output {
+                self.shifted_up_by_signed(*rhs as i32)
+            }
+        }
+
+        impl ::core::ops::Shr<u8> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: u8) -> Self::Output {
+                self.shifted_down_by(rhs as u32)
+            }
+        }
+
+        impl ::core::ops::Shr<&u8> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: &u8) -> Self::Output {
+                self.shifted_down_by(*rhs as u32)
+            }
+        }
+
+        impl ::core::ops::Shr<u16> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: u16) -> Self::Output {
+                self.shifted_down_by(rhs as u32)
+            }
+        }
+
+        impl ::core::ops::Shr<&u16> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: &u16) -> Self::Output {
+                self.shifted_down_by(*rhs as u32)
+            }
+        }
+
+        impl ::core::ops::Shr<u32> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: u32) -> Self::Output {
+                self.shifted_down_by(rhs)
+            }
+        }
+
+        impl ::core::ops::Shr<&u32> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: &u32) -> Self::Output {
+                self.shifted_down_by(*rhs)
+            }
+        }
+
+        impl ::core::ops::Shr<u64> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: u64) -> Self::Output {
+                if let Ok(shift) = rhs.try_into() {
+                    self.shifted_down_by(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shr<&u64> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: &u64) -> Self::Output {
+                if let Ok(shift) = (*rhs).try_into() {
+                    self.shifted_down_by(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shr<u128> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: u128) -> Self::Output {
+                if let Ok(shift) = rhs.try_into() {
+                    self.shifted_down_by(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shr<&u128> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: &u128) -> Self::Output {
+                if let Ok(shift) = (*rhs).try_into() {
+                    self.shifted_down_by(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shr<usize> for #ident {
+            type Output = Self;
+
+            #[cfg(target_pointer_width = "64")]
+            fn shr(self, rhs: usize) -> Self::Output {
+                if rhs <= u32::MAX as usize {
+                    self.shifted_down_by(rhs as u32)
+                } else {
+                    Self::new()
+                }
+            }
+
+            #[cfg(not(target_pointer_width = "64"))]
+            fn shr(self, rhs: usize) -> Self::Output {
+                self.shifted_down_by(rhs as u32)
+            }
+        }
+
+        impl ::core::ops::Shr<i8> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: i8) -> Self::Output {
+                self.shifted_down_by_signed(rhs as i32)
+            }
+        }
+
+        impl ::core::ops::Shr<&i8> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: &i8) -> Self::Output {
+                self.shifted_down_by_signed(*rhs as i32)
+            }
+        }
+
+        impl ::core::ops::Shr<i16> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: i16) -> Self::Output {
+                self.shifted_down_by_signed(rhs as i32)
+            }
+        }
+
+        impl ::core::ops::Shr<&i16> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: &i16) -> Self::Output {
+                self.shifted_down_by_signed(*rhs as i32)
+            }
+        }
+
+        impl ::core::ops::Shr<i32> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: i32) -> Self::Output {
+                self.shifted_down_by_signed(rhs)
+            }
+        }
+
+        impl ::core::ops::Shr<&i32> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: &i32) -> Self::Output {
+                self.shifted_down_by_signed(*rhs)
+            }
+        }
+
+        impl ::core::ops::Shr<i64> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: i64) -> Self::Output {
+                if let Ok(shift) = rhs.try_into() {
+                    self.shifted_down_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shr<&i64> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: &i64) -> Self::Output {
+                if let Ok(shift) = (*rhs).try_into() {
+                    self.shifted_down_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shr<i128> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: i128) -> Self::Output {
+                if let Ok(shift) = rhs.try_into() {
+                    self.shifted_down_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shr<&i128> for #ident {
+            type Output = Self;
+
+            fn shr(self, rhs: &i128) -> Self::Output {
+                if let Ok(shift) = (*rhs).try_into() {
+                    self.shifted_down_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+        }
+
+        impl ::core::ops::Shr<isize> for #ident {
+            type Output = Self;
+
+            #[cfg(target_pointer_width = "64")]
+            fn shr(self, rhs: isize) -> Self::Output {
+                if let Ok(shift) = rhs.try_into() {
+                    self.shifted_down_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+
+            #[cfg(not(target_pointer_width = "64"))]
+            fn shr(self, rhs: isize) -> Self::Output {
+                self.shifted_down_by_signed(rhs as i32)
+            }
+        }
+
+        impl ::core::ops::Shr<&isize> for #ident {
+            type Output = Self;
+
+            #[cfg(target_pointer_width = "64")]
+            fn shr(self, rhs: &isize) -> Self::Output {
+                if let Ok(shift) = (*rhs).try_into() {
+                    self.shifted_down_by_signed(shift)
+                } else {
+                    Self::new()
+                }
+            }
+
+            #[cfg(not(target_pointer_width = "64"))]
+            fn shr(self, rhs: &isize) -> Self::Output {
+                self.shifted_down_by_signed(*rhs as i32)
+            }
+        }
+
         impl ::core::ops::Sub for #ident {
             type Output = Self;
 
@@ -141,6 +675,14 @@ pub fn generate_code(ident: Ident, uint: Type) -> TokenStream {
         impl ::core::ops::SubAssign for #ident {
             fn sub_assign(&mut self, rhs: Self) {
                 *self = *self - rhs;
+            }
+        }
+
+        impl ::core::fmt::UpperHex for #ident {
+            fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                write!(f, "{}(", ::core::stringify!(#ident))?;
+                ::core::fmt::UpperHex::fmt(&self.0, f)?;
+                write!(f, ")")
             }
         }
 
@@ -362,6 +904,104 @@ pub fn generate_code(ident: Ident, uint: Type) -> TokenStream {
                 } else {
                     ::core::option::Option::None
                 }
+            }
+
+            #[doc = "Creates a copy of this set with all values incremented by `shift`.\n"]
+            #[doc = "Any values that reach or exceed [`Self::CAPACITY`] will be lost.\n"]
+            #[doc = "This is the `const` alternative to"]
+            #[doc = "[`Shl::shl`](https://doc.rust-lang.org/core/ops/trait.Shl.html#tymethod.shl)"]
+            #[doc = "for"]
+            #[doc = #plural_bitset_link]
+            pub const fn shifted_up_by(mut self, shift: u32) -> Self {
+                self.shift_up_by(shift);
+                self
+            }
+
+            #[doc = "Increments all values in this set by `shift`.\n"]
+            #[doc = "Any values that reach or exceed [`Self::CAPACITY`] will be lost.\n"]
+            #[doc = "This is the `const` alternative to"]
+            #[doc = "[`ShlAssign::shl_assign`](https://doc.rust-lang.org/core/ops/trait.ShlAssign.html#tymethod.shl_assign)"]
+            #[doc = "for"]
+            #[doc = #plural_bitset_link]
+            pub const fn shift_up_by(&mut self, shift: u32) {
+                self.0 = match self.0.checked_shl(shift) {
+                    Some(shifted) => shifted,
+                    None => 0,
+                };
+            }
+
+            /// Creates a copy of this set will all values incremented by `shift`.
+            ///
+            /// Any values that exit the bounds of the set will be lost.
+            pub const fn shifted_up_by_signed(mut self, shift: i32) -> Self {
+                self.shift_up_by_signed(shift);
+                self
+            }
+
+            /// Increments all values in this set by `shift`.
+            ///
+            /// Any values that exit the bounds of the set will be lost.
+            pub const fn shift_up_by_signed(&mut self, shift: i32) {
+                self.0 = if shift >= 0 {
+                    match self.0.checked_shl(shift as u32) {
+                        Some(shifted) => shifted,
+                        None => 0,
+                    }
+                } else {
+                    match self.0.checked_shr(-shift as u32) {
+                        Some(shifted) => shifted,
+                        None => 0,
+                    }
+                };
+            }
+
+            #[doc = "Creates a copy of this set with all values decremented by `shift`.\n"]
+            #[doc = "Any values that dip into the negatives will be lost.\n"]
+            #[doc = "This is the `const` alternative to"]
+            #[doc = "[`Shr::shr`](https://doc.rust-lang.org/core/ops/trait.Shr.html#tymethod.shr)"]
+            #[doc = "for"]
+            #[doc = #plural_bitset_link]
+            pub const fn shifted_down_by(mut self, shift: u32) -> Self {
+                self.shift_down_by(shift);
+                self
+            }
+
+            #[doc = "Decrements all values in this set by `shift`.\n"]
+            #[doc = "Any values that dip into the negatives will be lost.\n"]
+            #[doc = "This is the `const` alternative to"]
+            #[doc = "[`ShrAssign::shr_assign`](https://doc.rust-lang.org/core/ops/trait.ShrAssign.html#tymethod.shr_assign)"]
+            #[doc = "for"]
+            #[doc = #plural_bitset_link]
+            pub const fn shift_down_by(&mut self, shift: u32) {
+                self.0 = match self.0.checked_shr(shift) {
+                    Some(shifted) => shifted,
+                    None => 0,
+                };
+            }
+
+            /// Creates a copy of this set will all values incremented by `shift`.
+            ///
+            /// Any values that exit the bounds of the set will be lost.
+            pub const fn shifted_down_by_signed(mut self, shift: i32) -> Self {
+                self.shift_down_by_signed(shift);
+                self
+            }
+
+            /// Increments all values in this set by `shift`.
+            ///
+            /// Any values that exit the bounds of the set will be lost.
+            pub const fn shift_down_by_signed(&mut self, shift: i32) {
+                self.0 = if shift >= 0 {
+                    match self.0.checked_shr(shift as u32) {
+                        Some(shifted) => shifted,
+                        None => 0,
+                    }
+                } else {
+                    match self.0.checked_shl(-shift as u32) {
+                        Some(shifted) => shifted,
+                        None => 0,
+                    }
+                };
             }
 
             /// Clears the set, removing all values.
