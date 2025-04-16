@@ -488,7 +488,84 @@ pub fn generate_code(
                 assert!(SET_D.is_not(SET_C));
             }
 
-            // todo!("test fn is_disjoint(Self, Self) -> bool")
+            // fn is_disjoint(Self, Self) -> bool
+
+            #[test]
+            fn a_is_disjoint_from_complement() {
+                assert!(SET_A.is_disjoint(SET_A.complement()));
+            }
+
+            #[test]
+            fn a_isnt_disjoint_from_a() {
+                assert!(!SET_A.is_disjoint(SET_A));
+            }
+
+            #[test]
+            fn a_isnt_disjoint_from_b() {
+                assert!(!SET_A.is_disjoint(SET_B));
+                assert!(!SET_B.is_disjoint(SET_A));
+            }
+
+            #[test]
+            fn a_isnt_disjoint_from_c() {
+                assert!(!SET_A.is_disjoint(SET_C));
+                assert!(!SET_C.is_disjoint(SET_A));
+            }
+
+            #[test]
+            fn a_isnt_disjoint_from_d() {
+                assert!(!SET_A.is_disjoint(SET_D));
+                assert!(!SET_D.is_disjoint(SET_A));
+            }
+
+            #[test]
+            fn b_is_disjoint_from_complement() {
+                assert!(SET_B.is_disjoint(SET_B.complement()));
+            }
+
+            #[test]
+            fn b_isnt_disjoint_from_b() {
+                assert!(!SET_B.is_disjoint(SET_B));
+            }
+
+            #[test]
+            fn b_isnt_disjoint_from_c() {
+                assert!(!SET_B.is_disjoint(SET_C));
+                assert!(!SET_C.is_disjoint(SET_B));
+            }
+
+            #[test]
+            fn b_isnt_disjoint_from_d() {
+                assert!(!SET_B.is_disjoint(SET_D));
+                assert!(!SET_D.is_disjoint(SET_B));
+            }
+
+            #[test]
+            fn c_is_disjoint_from_complement() {
+                assert!(SET_C.is_disjoint(SET_C.complement()));
+            }
+
+            #[test]
+            fn c_isnt_disjoint_from_c() {
+                assert!(!SET_C.is_disjoint(SET_C));
+            }
+
+            #[test]
+            fn c_isnt_disjoint_from_d() {
+                assert!(!SET_C.is_disjoint(SET_D));
+                assert!(!SET_D.is_disjoint(SET_C));
+            }
+
+            #[test]
+            fn d_is_disjoint_from_complement() {
+                assert!(SET_D.is_disjoint(SET_D.complement()));
+            }
+
+            #[test]
+            fn d_isnt_disjoint_from_d() {
+                assert!(!SET_D.is_disjoint(SET_D));
+            }
+
             // todo!("test fn is_subset(Self, Self) -> bool")
             // todo!("test fn is_strict_subset(Self, Self) -> bool")
             // todo!("test fn is_superset(Self, Self) -> bool")

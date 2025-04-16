@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `BitSetN::symmetric_difference`
   - `BitSetN::is`
   - `BitSetN::is_not`
+  - `BitSetN::is_disjoint`
   - `<BitSetN as Debug>::fmt`
 - Eight shift methods for `BitSetN`
   - `shifted_up_by`
