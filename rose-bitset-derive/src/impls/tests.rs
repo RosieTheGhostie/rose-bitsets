@@ -24,10 +24,10 @@ pub fn generate_code(
             const COMP_A: u128 = 0x8ba3237df3c1c1a68c6390cfdd395442;
             const BITS_B: u128 = 0x446c4e86f71986f4b77f9320423feb4a;
             const COMP_B: u128 = 0xbb93b17908e6790b48806cdfbdc014b5;
-            const BITS_C: u128 = 0x6d5c852727edd96417f66ce7a17376ee;
-            const COMP_C: u128 = 0x92a37ad8d812269be80993185e8c8911;
-            const BITS_D: u128 = 0x89ba968fb8d945091704eb6e5c121aa2;
-            const COMP_D: u128 = 0x764569704726baf6e8fb1491a3ede55d;
+            const BITS_C: u128 = 0x6d5c852727edd96417f66ce7a17376e9;
+            const COMP_C: u128 = 0x92a37ad8d812269be80993185e8c8916;
+            const BITS_D: u128 = 0x89ba968fb8d945091704eb6e5c121aa6;
+            const COMP_D: u128 = 0x764569704726baf6e8fb1491a3ede559;
 
             const SET_A: #ident = #ident::from_bits((BITS_A & MASK) as _);
             const SET_B: #ident = #ident::from_bits((BITS_B & MASK) as _);
@@ -566,7 +566,130 @@ pub fn generate_code(
                 assert!(!SET_D.is_disjoint(SET_D));
             }
 
-            // todo!("test fn is_subset(Self, Self) -> bool")
+            // fn is_subset(Self, Self) -> bool
+
+            #[test]
+            fn empty_is_subset_of_everything() {
+                let empty = #ident::new();
+                assert!(empty.is_subset(empty));
+                assert!(empty.is_subset(#ident::all()));
+                assert!(empty.is_subset(SET_A));
+                assert!(empty.is_subset(SET_B));
+                assert!(empty.is_subset(SET_C));
+                assert!(empty.is_subset(SET_D));
+            }
+
+            #[test]
+            fn all_isnt_subset_of_anything_but_itself() {
+                let all = #ident::all();
+                assert!(!all.is_subset(#ident::new()));
+                assert!(all.is_subset(all));
+                assert!(!all.is_subset(SET_A));
+                assert!(!all.is_subset(SET_B));
+                assert!(!all.is_subset(SET_C));
+                assert!(!all.is_subset(SET_D));
+            }
+
+            #[test]
+            fn a_isnt_subset_of_complement() {
+                assert!(!SET_A.is_subset(SET_A.complement()));
+            }
+
+            #[test]
+            fn a_is_subset_of_a() {
+                assert!(SET_A.is_subset(SET_A));
+            }
+
+            #[test]
+            fn a_isnt_subset_of_b() {
+                assert!(!SET_A.is_subset(SET_B));
+            }
+
+            #[test]
+            fn a_isnt_subset_of_c() {
+                assert!(!SET_A.is_subset(SET_C));
+            }
+
+            #[test]
+            fn a_isnt_subset_of_d() {
+                assert!(!SET_A.is_subset(SET_D));
+            }
+
+            #[test]
+            fn b_isnt_subset_of_complement() {
+                assert!(!SET_B.is_subset(SET_B.complement()));
+            }
+
+            #[test]
+            fn b_isnt_subset_of_a() {
+                assert!(!SET_B.is_subset(SET_A));
+            }
+
+            #[test]
+            fn b_is_subset_of_b() {
+                assert!(SET_B.is_subset(SET_B));
+            }
+
+            #[test]
+            fn b_isnt_subset_of_c() {
+                assert!(!SET_B.is_subset(SET_C));
+            }
+
+            #[test]
+            fn b_isnt_subset_of_d() {
+                assert!(!SET_B.is_subset(SET_D));
+            }
+
+            #[test]
+            fn c_isnt_subset_of_complement() {
+                assert!(!SET_C.is_subset(SET_C.complement()));
+            }
+
+            #[test]
+            fn c_isnt_subset_of_a() {
+                assert!(!SET_C.is_subset(SET_A));
+            }
+
+            #[test]
+            fn c_isnt_subset_of_b() {
+                assert!(!SET_C.is_subset(SET_B));
+            }
+
+            #[test]
+            fn c_is_subset_of_c() {
+                assert!(SET_C.is_subset(SET_C));
+            }
+
+            #[test]
+            fn c_isnt_subset_of_d() {
+                assert!(!SET_C.is_subset(SET_D));
+            }
+
+            #[test]
+            fn d_isnt_subset_of_complement() {
+                assert!(!SET_D.is_subset(SET_D.complement()));
+            }
+
+            #[test]
+            fn d_isnt_subset_of_a() {
+                assert!(!SET_D.is_subset(SET_A));
+            }
+
+            #[test]
+            fn d_isnt_subset_of_b() {
+                assert!(!SET_D.is_subset(SET_B));
+            }
+
+            #[test]
+            fn d_isnt_subset_of_c() {
+                assert!(!SET_D.is_subset(SET_C));
+            }
+
+            #[test]
+            fn d_is_subset_of_d() {
+                assert!(SET_D.is_subset(SET_D));
+            }
+
             // todo!("test fn is_strict_subset(Self, Self) -> bool")
             // todo!("test fn is_superset(Self, Self) -> bool")
             // todo!("test fn is_strict_superset(Self, Self) -> bool")
@@ -666,7 +789,7 @@ fn generate_debug_tests(ident: &Ident) -> TokenStream {
         #[test]
         fn debug_c() {
             let indices = _NotAHashSet::from([
-                1, 2, 3, 5, 6, 7, 9, 10, 12, 13, 14, 16, 17, 20, 21, 22, 24, 29, 31, 32, 33, 34, 37,
+                0, 3, 5, 6, 7, 9, 10, 12, 13, 14, 16, 17, 20, 21, 22, 24, 29, 31, 32, 33, 34, 37,
                 38, 39, 42, 43, 45, 46, 49, 50, 52, 53, 54, 55, 56, 57, 58, 60, 66, 69, 70, 72, 75,
                 76, 78, 79, 80, 82, 83, 85, 86, 87, 88, 89, 90, 93, 96, 97, 98, 101, 104, 106, 111,
                 114, 115, 116, 118, 120, 122, 123, 125, 126,
@@ -678,9 +801,9 @@ fn generate_debug_tests(ident: &Ident) -> TokenStream {
         #[test]
         fn debug_d() {
             let indices = _NotAHashSet::from([
-                1, 5, 7, 9, 11, 12, 17, 20, 26, 27, 28, 30, 33, 34, 35, 37, 38, 40, 41, 43, 45, 46,
-                47, 50, 56, 57, 58, 60, 64, 67, 72, 74, 78, 80, 83, 84, 86, 87, 91, 92, 93, 95, 96,
-                97, 98, 99, 103, 105, 106, 108, 111, 113, 115, 116, 117, 119, 120, 123, 127,
+                1, 2, 5, 7, 9, 11, 12, 17, 20, 26, 27, 28, 30, 33, 34, 35, 37, 38, 40, 41, 43, 45,
+                46, 47, 50, 56, 57, 58, 60, 64, 67, 72, 74, 78, 80, 83, 84, 86, 87, 91, 92, 93, 95,
+                96, 97, 98, 99, 103, 105, 106, 108, 111, 113, 115, 116, 117, 119, 120, 123, 127,
             ]);
             assert_eq!(format!("{SET_D:?}"), format!("{indices:?}"));
             assert_eq!(format!("{SET_D:#?}"), format!("{indices:#?}"));
