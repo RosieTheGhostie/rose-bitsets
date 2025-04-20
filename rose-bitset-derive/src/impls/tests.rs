@@ -814,7 +814,130 @@ pub fn generate_code(
                 assert!(!SET_D.is_strict_subset(SET_D));
             }
 
-            // todo!("test fn is_superset(Self, Self) -> bool")
+            // fn is_superset(Self, Self) -> bool
+
+            #[test]
+            fn empty_isnt_superset_of_anything_but_itself() {
+                let empty = #ident::new();
+                assert!(empty.is_superset(empty));
+                assert!(!empty.is_superset(#ident::all()));
+                assert!(!empty.is_superset(SET_A));
+                assert!(!empty.is_superset(SET_B));
+                assert!(!empty.is_superset(SET_C));
+                assert!(!empty.is_superset(SET_D));
+            }
+
+            #[test]
+            fn all_is_superset_of_everything() {
+                let all = #ident::all();
+                assert!(all.is_superset(#ident::new()));
+                assert!(all.is_superset(all));
+                assert!(all.is_superset(SET_A));
+                assert!(all.is_superset(SET_B));
+                assert!(all.is_superset(SET_C));
+                assert!(all.is_superset(SET_D));
+            }
+
+            #[test]
+            fn a_isnt_superset_of_complement() {
+                assert!(!SET_A.is_superset(SET_A.complement()));
+            }
+
+            #[test]
+            fn a_is_superset_of_a() {
+                assert!(SET_A.is_superset(SET_A));
+            }
+
+            #[test]
+            fn a_isnt_superset_of_b() {
+                assert!(!SET_A.is_superset(SET_B));
+            }
+
+            #[test]
+            fn a_isnt_superset_of_c() {
+                assert!(!SET_A.is_superset(SET_C));
+            }
+
+            #[test]
+            fn a_isnt_superset_of_d() {
+                assert!(!SET_A.is_superset(SET_D));
+            }
+
+            #[test]
+            fn b_isnt_superset_of_complement() {
+                assert!(!SET_B.is_superset(SET_B.complement()));
+            }
+
+            #[test]
+            fn b_isnt_superset_of_a() {
+                assert!(!SET_B.is_superset(SET_A));
+            }
+
+            #[test]
+            fn b_is_superset_of_b() {
+                assert!(SET_B.is_superset(SET_B));
+            }
+
+            #[test]
+            fn b_isnt_superset_of_c() {
+                assert!(!SET_B.is_superset(SET_C));
+            }
+
+            #[test]
+            fn b_isnt_superset_of_d() {
+                assert!(!SET_B.is_superset(SET_D));
+            }
+
+            #[test]
+            fn c_isnt_superset_of_complement() {
+                assert!(!SET_C.is_superset(SET_C.complement()));
+            }
+
+            #[test]
+            fn c_isnt_superset_of_a() {
+                assert!(!SET_C.is_superset(SET_A));
+            }
+
+            #[test]
+            fn c_isnt_superset_of_b() {
+                assert!(!SET_C.is_superset(SET_B));
+            }
+
+            #[test]
+            fn c_is_superset_of_c() {
+                assert!(SET_C.is_superset(SET_C));
+            }
+
+            #[test]
+            fn c_isnt_superset_of_d() {
+                assert!(!SET_C.is_superset(SET_D));
+            }
+
+            #[test]
+            fn d_isnt_superset_of_complement() {
+                assert!(!SET_D.is_superset(SET_D.complement()));
+            }
+
+            #[test]
+            fn d_isnt_superset_of_a() {
+                assert!(!SET_D.is_superset(SET_A));
+            }
+
+            #[test]
+            fn d_isnt_superset_of_b() {
+                assert!(!SET_D.is_superset(SET_B));
+            }
+
+            #[test]
+            fn d_isnt_superset_of_c() {
+                assert!(!SET_D.is_superset(SET_C));
+            }
+
+            #[test]
+            fn d_is_superset_of_d() {
+                assert!(SET_D.is_superset(SET_D));
+            }
+
             // todo!("test fn is_strict_superset(Self, Self) -> bool")
             // todo!("test fn len(Self) -> usize")
             // todo!("test fn contains(Self, usize) -> bool")

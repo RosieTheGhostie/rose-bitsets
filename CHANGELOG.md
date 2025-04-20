@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `BitSetN::is_disjoint`
   - `BitSetN::is_subset`
   - `BitSetN::is_strict_subset`
+  - `BitSetN::is_superset`
   - `<BitSetN as Debug>::fmt`
 - Eight shift methods for `BitSetN`
   - `shifted_up_by`
